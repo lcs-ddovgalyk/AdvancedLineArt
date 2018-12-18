@@ -43,6 +43,7 @@ void setup() {
     //   CONDITION1   AND  CONDITION2
     if ( (x > 0) && (x % 7 == 0) && (y > 0) && (y % 7 == 0) ) {
       fill(b);
+
       rect(x, y, diameter, diameter);  // Draw at (x, y) with given diameter
       
       // draw the circle to the PDF
