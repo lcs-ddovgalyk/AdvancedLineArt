@@ -1,3 +1,4 @@
+//sets up the image and
 import processing.pdf.*;
 PImage bitmapImage;
 PGraphics vectorImage;
@@ -7,7 +8,7 @@ void setup() {
   //  WIDTH  HEIGHT
   size(700, 700); // size of canvas matches bitmapImage image
   
-  noFill();
+  
   strokeWeight(2);
   background(255);
 
@@ -22,7 +23,8 @@ void setup() {
   
   // start drawing to the output PDF file
   vectorImage.beginDraw();
-
+  //set's no filling for the vector image
+  vectorImage.noFill();
   // Make a loop that lets us look at all pixels
   // From 0 to 423,999 (800 x 530)
   int position = 0;  // make a simple variable that starts at 0
@@ -31,8 +33,8 @@ void setup() {
     
     // Get the brightness
     float b = 255 - brightness(bitmapImage.pixels[position]);  // 0 to 255
-    float diameter = map(b, 0, 255, 2, 5);         // 1 to 8
-    fill(b);
+    //float diameter = map(b, 0, 255, 2, 5);         // 1 to 8
+    float diameter = 7;
     // Where to draw the ellipse?
     int x = position % width;
     int y = position / width;
@@ -40,11 +42,11 @@ void setup() {
     // Draw an ellipse for every 100th pixel
     //   CONDITION1   AND  CONDITION2
     if ( (x > 0) && (x % 7 == 0) && (y > 0) && (y % 7 == 0) ) {
-      
-      rect(x, y, 10, 10);  // Draw at (x, y) with given diameter
+      fill(b);
+      rect(x, y, diameter, diameter);  // Draw at (x, y) with given diameter
       
       // draw the circle to the PDF
-      vectorImage.rect(x, y, 10, 10); // draw circle at (x, y) with given diameter
+      vectorImage.rect(x, y, diameter, diameter); // draw circle at (x, y) with given diameter
 
     }
     
