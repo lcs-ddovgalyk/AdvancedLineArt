@@ -1,4 +1,4 @@
-void setup() {
+void setup() { //<>//
 
   size(500, 500);
   background(255);
@@ -7,16 +7,21 @@ void setup() {
   //degrees = k
   float k = 10.0 / 360.0;
   float c = 200; //<>//
+  //diameter 
+
   float a = 10;
 
   float priorX = 0;
   float priorY = c;
-  
+
   for (int x = 0; x <= 10; x += 1) {
     float y = a * sin( degreesToRadians( (x - d) / k )  ) + c;
     point(x, y); //<>//
+    line(priorX, priorY, x, y);
+    priorX = x;
+    priorY = y;
   }
-} //<>//
+}
 float degreesToRadians(float degrees) {
 
   return degrees * PI / 180;
