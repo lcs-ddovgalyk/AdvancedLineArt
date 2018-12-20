@@ -11,7 +11,7 @@ void setup() {
   size(700, 700); // size of canvas matches bitmapImage image
 
 
-  strokeWeight(2);
+  strokeWeight(1);
   background(255);
 
   // load the image
@@ -35,27 +35,7 @@ void setup() {
   // loop so long as position is less than or equal to 423,999
   while (position < 490000) {
 
-    // Get the brightness
-    float b = 255 - brightness(bitmapImage.pixels[position]);  // 0 to 255
-    float diameter = map(b, 0, 255, 2, 5);
-    float d = 5;
-    //degrees = k
-    float k = 10.0 / 360.0;
-    float c = diameter;
-    //diameter 
-
-    float a = 10;
-
-    float priorX = 0;
-    float priorY = c;
-
-    for (int x = 0; x <= 10; x += 1) {
-      float y = a * sin( degreesToRadians( (x - d) / k )  ) + c;
-      point(x, y);
-      line(priorX, priorY, x, y);
-      priorX = x;
-      priorY = y;
-    }
+    
 
 
 
@@ -66,12 +46,37 @@ void setup() {
 
     // Draw an ellipse for every 100th pixel
     //   CONDITION1   AND  CONDITION2
-    if ( (x > 0) && (x % 7 == 0) && (yy > 0) && (yy % 7 == 0) ) {
+    if ( (x > 0) && (x % 10 == 0) && (yy > 0) && (yy % 10 == 0) ) {
+      
+      // Get the brightness
+      float b = 255 - brightness(bitmapImage.pixels[position]);  // 0 to 255
+      float diameter = map(b, 0, 255, 1, 9);
+     
 
-      rect(x, yy, diameter, diameter);
+      float d = x;
+      //degrees = k
+      float k = 10.0 / 360.0;
+      float c = yy;
+      //diameter 
+
+      float a = diameter;
+
+      float priorX = 0;
+      float priorY = c;
+
+      for (int xx = x; xx <= x + 10; xx += 1) {
+        float y = a * sin( degreesToRadians( (xx - d) / k )  ) + c;
+
+        line(priorX, priorY, xx, y);
+        vectorImage.line(priorX, priorY, xx, y);
+        priorX = xx;
+        priorY = y;
+      }
+      
+   
 
       // draw the circle to the PDF
-      vectorImage.rect(x, yy, diameter, diameter); // draw circle at (x, y) with given diameter
+      //vectorImage.line(x, yy, diameter, diameter); // draw circle at (x, y) with given diameter
     }
 
     // Increment the position
