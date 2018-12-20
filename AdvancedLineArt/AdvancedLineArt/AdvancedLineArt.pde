@@ -39,38 +39,40 @@ void setup() {
 
 
 
-    // finishes the code
-    // Where to draw the ellipse?
+    //horizontal
     int x = position % width;
-    int yy = position / width;
+    //vertical
+    int y = position / width;
 
-    // Draw an ellipse for every 100th pixel
+    // Draw a sin wave every 10th pixel
     //   CONDITION1   AND  CONDITION2
-    if ( (x > 0) && (x % 10 == 0) && (yy > 0) && (yy % 10 == 0) ) {
+    if ( (x > 0) && (x % 10 == 0) && (y > 0) && (y % 10 == 0) ) {
       
       // Get the brightness
       float b = 255 - brightness(bitmapImage.pixels[position]);  // 0 to 255
       float diameter = map(b, 0, 255, 1, 9);
      
-
+      // d = to horizontal length of the wave
       float d = x;
       //degrees = k
       float k = 10.0 / 360.0;
-      float c = yy;
+      //c = to vertical length of the wave
+      float c = y;
       //diameter 
-
       float a = diameter;
-
+      // set's PriorX to 0 and Prior Y to C
       float priorX = 0;
       float priorY = c;
 
-      for (int xx = x; xx <= x + 10; xx += 1) {
-        float y = a * sin( degreesToRadians( (xx - d) / k )  ) + c;
-
-        line(priorX, priorY, xx, y);
-        vectorImage.line(priorX, priorY, xx, y);
-        priorX = xx;
-        priorY = y;
+      for (int sinx = x; sinx <= x + 10; sinx += 1) {
+        float siny = a * sin( degreesToRadians( (sinx - d) / k )  ) + c;
+        //print's the output
+        line(priorX, priorY, sinx, siny);
+        //print's the output to Acrobat Reader
+        vectorImage.line(priorX, priorY, sinx, siny);
+        //set's priorX to sinx and priory to siny
+        priorX = sinx;
+        priorY = siny;
       }
       
    
